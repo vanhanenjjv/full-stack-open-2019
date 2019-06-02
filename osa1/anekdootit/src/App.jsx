@@ -1,15 +1,51 @@
-import React, { useState } from 'react';
+import React, { Component} from 'react';
 
-const App = ({ anecdotes }) => {
-  const [selected, setSelected] = useState(0);
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <>
-      {anecdotes[selected]}
-      <br />
-      <button onClick={() => setSelected(Number.parseInt(Math.random() * anecdotes.length))}>next anecdote</button>
-    </>
-  );
+    this.state = {
+      selected: 0,
+      votes: new Array(props.anecdotes.length).fill(0)
+    };
+  }
+
+  render = () => {
+    const { anecdotes } = this.props;
+    const { selected, votes } = this.state;
+
+    return (
+      <>
+        <p>{anecdotes[selected]}</p>
+        <p>has {votes[selected]} votes</p>
+        <div>
+          <button onClick={this.submitVote}>vote</button>
+          <button onClick={this.getRandomAnecdote}>next anecdote</button>
+        </div>
+      </>
+    );
+  }
+
+  submitVote = () => {
+    const { selected, votes } = this.state;
+
+    const updatedVotes = votes;
+    updatedVotes[selected] += 1;
+
+    this.setState({
+      ...this.state,
+      votes: updatedVotes
+    });
+  }
+
+  getRandomAnecdote = () => {
+    const { anecdotes } = this.props;
+
+    this.setState({
+      ...this.state,
+      selected: Number.parseInt(Math.random() * anecdotes.length)
+    })
+  }
 }
 
 export default App;
