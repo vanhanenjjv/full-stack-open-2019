@@ -14,14 +14,21 @@ class App extends Component {
     const { anecdotes } = this.props;
     const { selected, votes } = this.state;
 
+    const mostVotedAnecdoteIndex = votes.indexOf(Math.max(...votes));
+
     return (
       <>
+        <h1>Anecdote of the day</h1>
         <p>{anecdotes[selected]}</p>
         <p>has {votes[selected]} votes</p>
         <div>
           <button onClick={this.submitVote}>vote</button>
           <button onClick={this.getRandomAnecdote}>next anecdote</button>
         </div>
+
+        <h1>Anecdote with most votes</h1>
+        <p>{anecdotes[mostVotedAnecdoteIndex]}</p>
+        <p>has {votes[mostVotedAnecdoteIndex]} votes</p>
       </>
     );
   }
