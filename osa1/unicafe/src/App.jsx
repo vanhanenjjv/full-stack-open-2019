@@ -29,6 +29,9 @@ const App = () => {
       {options.map(o => (
         <p ey={o.value}>{o.label} {votes.filter(v => v.label === o.label).length}</p>
       ))}
+      <p>all {votes.length}</p>
+      <p>average {votes.length > 0 ? (votes.reduce((sum, vote) => sum + vote.value, 0) / votes.length) : 0}</p>
+      <p>positive {votes.length > 0 ? ((votes.filter(v => v.value > 0).length / votes.length) * 100) : 0} %</p>
     </>
   );
 }
