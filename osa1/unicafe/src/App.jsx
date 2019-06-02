@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from './components/Button';
 import Statistics from './components/Statistics';
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
       <h1>give feedback</h1>
       <div>
         {options.map(o => (
-          <button key={o.value} onClick={() => submitVote(o)}>{o.label}</button>
+          <Button key={o.value} text={o.label} onClick={() => submitVote(o)} />
         ))}
       </div>
       <Statistics options={options} votes={votes} />

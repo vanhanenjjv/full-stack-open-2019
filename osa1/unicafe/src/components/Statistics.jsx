@@ -1,4 +1,5 @@
 import React from 'react';
+import Statistic from './Statistic';
 
 const Statistics = ({ options, votes }) => (
   <>
@@ -7,7 +8,7 @@ const Statistics = ({ options, votes }) => (
       <h4>No feedback given</h4> :
       <>
         {options.map(o => (
-          <p key={o.value}>{o.label} {votes.filter(v => v.label === o.label).length}</p>
+          <Statistic key={o.value} text={o.label} value={votes.filter(v => v.label === o.label).length} />
         ))}
         <p>all {votes.length}</p>
         <p>average {votes.length > 0 ? (votes.reduce((sum, vote) => sum + vote.value, 0) / votes.length) : 0}</p>
